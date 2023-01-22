@@ -23,13 +23,13 @@ def user(name):
 
 # Custom Error Pages
 
-# Invalid URL
+# Invalid URL 404 error
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
 
-# Invalid URL
+# Invalid URL 500 error
 @app.errorhandler(500)
 def page_not_found(e):
     return render_template('500.html'), 500
