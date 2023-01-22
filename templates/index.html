@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Page</title>
-</head>
-<body style="text-align:center; background-color:#ffc857; color:#032B43">
-<h1>Hello World!</h1>
-<p>This is my first webpage!</p>
-<p>{{ first_name }}</p>
-<p>{{ stuff|safe }}</p>
-<p> Toppings:
-    {% for pizza in favorite_pizza %}
-        {{ pizza|upper }},
-    {% endfor %}
-</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Land page{% endblock title %}
+
+{% block content %}
+    <body style="text-align:center; background-color:#ffc857; color:#032B43">
+        <h1>Hello World!</h1>
+        <p>This is my first webpage!</p>
+        <p>{{ first_name }}</p>
+        <p>{{ stuff|safe }}</p>
+        <p> Toppings:
+            {% for pizza in favorite_pizza %}
+            {{ pizza|upper }},
+            {% endfor %}
+        </p>
+    </body>
+{% endblock content %}
