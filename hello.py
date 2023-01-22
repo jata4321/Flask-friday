@@ -29,12 +29,39 @@ class Users(db.Model):
 
 
 # Create Form Class
+# Create Form Class
 class NameForm(FlaskForm):
-    name = StringField('Your name', validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 
-# Create a route decorator
+class UserForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+
+# Create a routes
+# Databases routes
+@app.route('/user/add', methods=['GET', 'POST'])
+def add_user():
+    name = None
+    form = UserForm()
+    if form.validate_on_submit():
+        user = Users.query.filter_by(email=form.email.data).first()
+        if user is None:
+            user = Users(name=form.name.data, email=form.email.data)
+            db.session.add(user)
+            db.session.commit()
+        name = form.name.data
+        form.name.data = ''
+        form.email.data = ''
+        flash('User added to database successfully!')
+    our_users = Users.query.order_by(Users.date_added)
+    return render_template('add_user.html', form=form, name=name, our_users=our_users)
+
+
+# Static page
 @app.route('/')
 def index():
     first_name = 'Kuba'
@@ -59,7 +86,7 @@ def name():
     if form.validate_on_submit():
         name = form.name.data
         form.name.data = ''
-        flash('Form Submitted Correctly!')
+        flash('Form Submitted Successfully!')
     return render_template('name.html', name=name, form=form)
 
 
