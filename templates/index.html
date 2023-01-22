@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Page</title>
+</head>
+<body>
+<h1>Hello World!</h1>
+<p>This is my first webpage!</p>
+<p>{{ first_name }}</p>
+<p>{{ stuff|safe }}</p>
+<p> Toppings:
+    {% for pizza in favorite_pizza %}
+    {{ pizza }},
+    {% endfor %}
+</p>
+</body>
+</html>

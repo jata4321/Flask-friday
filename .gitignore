@@ -1,0 +1,4 @@
+.gitingnore
+
+.ssh
+venv_sql
