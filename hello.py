@@ -13,7 +13,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 # Secret key
 app.config['SECRET_KEY'] = 'you want to change it in the future'
 
-db = SQLAlchemy(app)
+db = SQLAlchemy(app=app)
 
 
 # Create Model
@@ -23,21 +23,21 @@ class Users(db.Model):
     email = db.Column(db.String(30), nullable=False, unique=True)
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # Create A String
+# Create A String
     def __repr__(self):
         return f'<Name {self.name}'
 
 
-# Create Form Class
-# Create Form Class
+# Create NameForm Class
 class NameForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 
+# Create UserForm Class
 class UserForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(),])
     submit = SubmitField('Submit')
 
 
@@ -95,7 +95,6 @@ def name():
 @app.errorhandler(404)
 def page_not_found():
     return render_template('404.html'), 404
-
 
 # Invalid URL 500 error
 @app.errorhandler(500)
